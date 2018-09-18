@@ -1,0 +1,13 @@
+{
+  "rules": {
+   },
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8
+  },
+  "extends": [
+    "airbnb-base"
+  ]
+}
