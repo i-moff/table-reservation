@@ -6,3 +6,6 @@ node_modules
 
 #config
 .env
+
+# Api documentation directory
+apidoc
