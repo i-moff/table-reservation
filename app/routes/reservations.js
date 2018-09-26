@@ -3,13 +3,15 @@ const router = express.Router();
 const asyncHandler = require('./../middlewares/async');
 
 const reservationsCtrl = require('../controllers/reservations');
+const reservationOrderCtrl = require('../controllers/reservationOrders');
 
 router.route('/reservations').post(asyncHandler(reservationsCtrl.createReservation));
-
 router.route('/reservations/:reservationId')
   .get(asyncHandler(reservationsCtrl.getReservationInfo))
   .put(asyncHandler(reservationsCtrl.updateReservation))
   .delete(asyncHandler(reservationsCtrl.deleteReservation));
+
+router.route('/reservations/:reservationId/orders').post(asyncHandler(reservationOrderCtrl.createOrder));
 
 module.exports = router;
 
