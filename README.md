@@ -9,3 +9,6 @@
 
 ### Generate APIDocs
 * `npm run apidoc`
+
+### TODO:
+* Pack into docker

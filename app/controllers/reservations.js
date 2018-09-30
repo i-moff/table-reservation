@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const ReservationService = require('./../services/ReservationService');
+const AMQP = require('./../utils/AMQP');
 
 class Reservations {
 
@@ -17,11 +18,12 @@ class Reservations {
    * @param res
    */
   static async createReservation(req, res) {
-    const reservationId = await ReservationService.create(req.body);
+    ReservationService.validateData(req.body);
+    const reservationData = ReservationService.prepareReservationData(req.body);
 
-    res.status(httpStatus.CREATED)
-      .location(`/reservations/${reservationId}`)
-      .send();
+    await AMQP.send(AMQP.RESERVATION_REQUEST_QUEUE, JSON.stringify({ ...req.body, reservationData }));
+
+    return res.json({ message: 'Your reservation is accepted please wait confirmation.' })
   }
 
   /**
