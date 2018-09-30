@@ -11,7 +11,6 @@ app.use(cookieParser());
 
 app.use('/api', reservationsRoutes);
 
-
 app.use(errorHandler);
 
 app.listen(8080, () => {

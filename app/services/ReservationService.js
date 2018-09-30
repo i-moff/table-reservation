@@ -15,13 +15,12 @@ class ReservationService {
    * @param {Number} id
    */
   static async getItem(id) {
-
     // NOTICE: method first() throws exception if no items
     const queryResult = (await db
-      .select()
+      .select("reservations.*", "tables.*", "reservations.id as id")
       .from(TABLE_RESERVATION)
-      .leftJoin('tables', 'tables.id', 'reservations.table_id')
-      .where({ 'reservations.id': id }))[0];
+      .leftJoin("tables", "tables.id", "reservations.table_id")
+      .where({ "reservations.id": id }))[0];
 
     if (!queryResult) {
       return null;
